@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.requerimiento.app.mappers.RequerimientoMapper">
+
+	<insert id="insert" parameterType="requerimiento">
+		insert into requerimiento(nombre, apellidos, area) values(#{nombre},#{apellidos},#{area})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		delete from requerimiento where id=#{id}
+	</delete>
+
+	<update id="update" parameterType="requerimiento">
+		update requerimiento set nombre=#{nombre},apellidos=#{apellidos},area=#{area} where id=#{id}
+	</update>
+
+	<select id="get" parameterType="int" resultType="requerimiento">
+		select * from requerimiento where id=#{id}
+	</select>
+
+	<select id="list" parameterType="int" resultType="requerimiento">
+		select * from requerimiento
+	</select>
+
+</mapper>

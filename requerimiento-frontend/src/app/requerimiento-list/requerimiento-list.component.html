@@ -1,0 +1,93 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 style="text-align: center">Requerimientos</h1><br>
+    <div class="row" [hidden]="!deleteMessage">
+
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Requerimiento Eliminado</strong>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+
+
+  <div class="panel-body">
+    <table class="table table-hover table-sm" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+      <thead class="thead-light">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Area</th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let requerimiento of requerimientos ">
+          <td>{{requerimiento.nombre}}</td>
+          <td>{{requerimiento.apellidos}}</td>
+          <td>{{requerimiento.area}}</td>
+          <td><button (click)="deleteRequerimiento(requerimiento.id)" class='btn btn-primary'><i
+                class="fa fa-futboll-0">Eliminar</i></button>&nbsp;
+            <button (click)="getRequerimiento(requerimiento.id)" class='btn btn-info' data-toggle="modal"
+              data-target="#myModal">Update</button>
+          </td>
+        </tr>
+      </tbody><br>
+    </table>
+  </div>
+</div>
+
+<div class="modal" id="myModal" *ngIf = "requerimientoSingle">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="updateFormGroup" #updateForm (ngSubmit)="updateRequerimiento(updateRequerimiento)">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="text-align: center">Actualizar Requerimiento</h4>
+
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div [hidden]="isupdated">
+
+            <input type="hidden" class="form-control" formControlName="id" [(ngModel)]="requerimientoSingle.id">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" class="form-control" formControlName="nombre" [(ngModel)]="requerimientoSingle.nombre">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Apellidos</label>
+              <input type="text" class="form-control" formControlName="apellidos" [(ngModel)]="requerimientoSingle.apellidos">
+            </div>
+
+            <div class="form-group">
+              <label for="name">Area</label>
+              <select class="form-control" formControlName="area" required>
+                <option value="Logistica" [selected]="'logistica' == requerimientoSingle.area">Logística</option>
+                <option value="RRHH" [selected]="'rrhh' == requerimientoSingle.area">Recursos Humanos</option>
+                <option value="Contabilidad" [selected]="'contabilidad' == requerimientoSingle.area">Contabilidad</option>
+                <option value="Tecnologia" [selected]="'tecnologia' == requerimientoSingle.area">Tecnología</option>
+              </select>
+            </div>
+          </div>
+          <div [hidden]="!isupdated">
+            <h4>Requerimiento Actualizado!</h4>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" [hidden]="isupdated">Update</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeisUpdate()">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

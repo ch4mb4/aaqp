@@ -1,0 +1,67 @@
+<h3>Agregar Requerimiento</h3>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="saveFormGroup" #saveForm (ngSubmit)="saveRequerimiento(saveRequerimiento)">
+          <div class="form-group">
+              <label for="name">Nombre</label>
+              <input type="text" class="form-control"  formControlName="nombre" data-toggle="tooltip" 
+                 data-placement="right" title="Ingrese el nombre" >
+              <div class="alert alert-danger" *ngIf = "(Nombre.touched) && (Nombre.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="Nombre.errors.required">Nombre es requerido</span>
+                    <span *ngIf = "Nombre.errors.minlength"> 
+                      Error de data
+                    </span>                   
+                </div>
+          </div>
+  
+          <div class="form-group">
+              <label for="name">Apellidos</label>
+              <input type="text" class="form-control" formControlName="apellidos" 
+                data-toggle="tooltip" data-placement="right" title="Ingrese el apellido">
+                <div class="alert alert-danger" *ngIf = "(Apellidos.touched) && (Apellidos.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="Apellidos.errors.required">Apellidos es requerido</span>
+                    <span *ngIf = "Apellidos.errors.minlength"> 
+                        Error de data
+                    </span>                   
+                </div>
+          </div>
+  
+          <div class="form-group">
+              <label for="area">Area</label>
+                <select class="form-control" formControlName="area" data-toggle="tooltip" 
+                      data-placement="right" title="Seleccione el area">
+                    <option value="null">--Sellecione el area--</option>
+                  <option value="Logistica">Logística</option>
+                  <option value="RRHH">Recursos Humanos</option>
+                  <option value="Contabilidad">Contabilidad</option>
+                  <option value="Tecnologia">Tecnología</option>
+                </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="archivo">Archivo</label>
+            <input type="file" name="file" (change)="fileChange($event)" class="form-control-file" id="archivo" aria-describedby="fileHelp">
+         </div>
+         
+          <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+      <div [hidden]="!submitted">
+         <h4>Se registró correctamente!</h4>
+         <button (click)="addRequerimientoForm()" class='btn btn-primary'>Agregar Requerimiento</button>
+      </div>      
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+
