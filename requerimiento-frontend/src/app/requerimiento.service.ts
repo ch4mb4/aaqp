@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class RequerimientoService {
     return this.http.get(`${this.baseUrl}`+'list');
   }
 
-  insert(Requerimiento: object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`+'insert', Requerimiento);
+  insert(requerimiento: object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`+'insert', requerimiento);
   }
 
   delete(id: number): Observable<any> {
@@ -31,4 +31,13 @@ export class RequerimientoService {
   update(id: number, value: any): Observable<Object> {
     return this.http.post(`${this.baseUrl}update/${id}`, value);
   }  
+
+  upload(formData:FormData){
+    let headers = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append("Content-Type", 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW');
+    return this.http.post(this.baseUrl+'upload', formData,{
+      headers: headers
+   })
+  };
 }                                           

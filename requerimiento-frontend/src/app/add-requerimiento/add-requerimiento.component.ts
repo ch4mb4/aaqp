@@ -51,16 +51,16 @@ export class AddRequerimientoComponent implements OnInit {
         let file: File = fileList[0];    
         this.formData.append('file', file);
         this.readytoupload =true;
+        this.upload();
     }
   }
-  // uploadFile(){
-  //      if(this.readytoupload){
-  //       this.featureservice.uploadFIle(this.formData).subscribe(data => {
-  //         const a = data.json();
-  //         this.goToProcess(a.process_id)
-  //       });
-  //      }
-  // }
+  
+  upload(){
+      if(this.readytoupload){
+       this.requerimientoService.upload(this.formData)
+       .subscribe(data => console.log(data), error => console.log(error));
+      }
+ }
 
   get Nombre(){
     return this.saveFormGroup.get('nombre');
